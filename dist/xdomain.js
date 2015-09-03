@@ -466,8 +466,10 @@ XHookHttpRequest = window[XMLHTTP] = function() {
       }
       _ref2 = request.headers;
       for (header in _ref2) {
-        value = _ref2[header];
-        xhr.setRequestHeader(header, value);
+          if (header !== 'Master-Cookie' && header !== 'Slave-Cookie') {
+            value = _ref2[header];
+            xhr.setRequestHeader(header, value);
+          }
       }
       if (request.body instanceof XHookFormData) {
         request.body = request.body.fd;
