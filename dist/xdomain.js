@@ -548,6 +548,8 @@
             }
             return facade;
         };
+
+        return xhook;
     }
 
 if (typeof this.define === "function" && this.define.amd) {
