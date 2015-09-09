@@ -279,7 +279,7 @@ NativeXMLHttp = window[XMLHTTP];
 
 xhook[XMLHTTP] = NativeXMLHttp;
 
-XHookHttpRequest = window[XMLHTTP] = function() {
+XHookHttpRequest = function() {
   var ABORTED, currentState, emitFinal, emitReadyState, facade, hasError, hasErrorHandler, readBody, readHead, request, response, setReadyState, status, transiting, writeBody, writeHead, xhr;
   ABORTED = -1;
   xhr = new xhook[XMLHTTP]();
