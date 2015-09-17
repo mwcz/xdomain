@@ -949,9 +949,9 @@ function xdomain_factory(xhook) {
         });
     };
 
-    'use strict';
-
-    xhook = (this.exports || this).xhook;
+    if (typeof xhook === 'undefined') {
+        xhook = (this.exports || this).xhook;
+    }
 
     xdomain = function(o) {
         if (!o) {
@@ -1145,14 +1145,18 @@ return new RegExp("^" + str + "$");
     })();
 
     startPostMessage();
+    setupEmitter();
+
+    return xdomain;
 }
 
 if (typeof this.define === "function" && this.define.amd) {
-  define("xdomain", ["xhook"], function(xh) {
-    return xdomain_factory(xh);
+  define(["xhook"], function(xhook) {
+    return xdomain_factory(xhook);
   });
 } else {
-  (this.exports || this).xdomain = xdomain_factory();
+    window.xdomain = xdomain_factory(xhook);
+    (this.exports || this).xdomain = window.xdomain;
 }
 
 }.call(this,window));
